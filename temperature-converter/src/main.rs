@@ -6,7 +6,7 @@ fn main() {
 
     loop {
         println!("1: Celsius para Fahrenheit");
-        println!("2: Farenheit para Celsius");
+        println!("2: Fahrenheit para Celsius");
         stdin()
         .read_line(&mut conversion_type)
         .expect("Escolha o tipo de conversão");
