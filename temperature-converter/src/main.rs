@@ -1,36 +1,44 @@
-use dialoguer::{Select, Input};
+use std::io::stdin;
 
 fn main() {
-    let items = vec!["Celsius ºC", "Farenheit ºF", "Kelvin K"];
+    let mut conversion_type = String::new();
+    let mut temperature  = String::new();
 
-    let convert_from = Select::new()
-        .with_prompt("From which unit do you want to convert from?")
-        .items(&items)
-        .interact()
-        .unwrap_or_default();
+    loop {
+        println!("1: Celsius para Farenheit");
+        println!("2: Farenheit para Celsius");
+        stdin()
+        .read_line(&mut conversion_type)
+        .expect("Escolha o tipo de conversão");
     
-    println!("You chose to convert from {}", items[convert_from]);
+        let convert_to: i8 = match  conversion_type.trim().parse(){
+            Ok(i) => i,
+            _ => 0,
+        };
+    
+        println!("Escolha a temperatura:");
+        stdin()
+        .read_line(&mut temperature)
+        .expect("Temperatura Inválida");
+    
+        let result = match convert_to {
+            1 =>  ctof(temperature.trim().parse::<f64>().unwrap()),
+            2 => ftoc(temperature.trim().parse::<f64>().unwrap()),
+            _ => {
+                println!("Escolha um caso valido");
+                continue;
+            }
+        };
+    
+        println!("Resultado: {}", result);
+        break;
+    }
+}
 
-    let filtered_items = items
-        .iter()
-        .enumerate()
-        .filter(|(usize, &&_)|  *usize != convert_from)
-        .map(|(_, &item)| item.to_owned())
-        .collect::<Vec<String>>();
+fn ctof(temp: f64) -> f64 {
+    return f64::from(temp * 1.8) + 32.0;
+}
 
-    let convert_into = Select::new()
-        .with_prompt("Which unit do you wish to convert into?")
-        .items(&filtered_items)
-        .interact()
-        .unwrap_or_default();
-
-    println!("You chose to convert into {}", items[convert_into]);
-
-    let original_temperature: f32 = Input::new()
-        .default(10.0)
-        .with_prompt("Enter the temperature:")
-        .interact()
-        .unwrap_or_default();
-
-    println!("Temperature in {}: {}", items[convert_from], original_temperature)
+fn ftoc(temp: f64) -> f64 {
+    return f64::from(temp - 32.0) / 1.8;
 }
