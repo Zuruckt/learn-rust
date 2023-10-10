@@ -5,7 +5,7 @@ fn main() {
     let mut temperature  = String::new();
 
     loop {
-        println!("1: Celsius para Farenheit");
+        println!("1: Celsius para Fahrenheit");
         println!("2: Farenheit para Celsius");
         stdin()
         .read_line(&mut conversion_type)
