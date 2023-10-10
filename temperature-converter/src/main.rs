@@ -36,9 +36,9 @@ fn main() {
 }
 
 fn ctof(temp: f64) -> f64 {
-    return f64::from(temp * 1.8) + 32.0;
+    (temp * 1.8) + 32.0
 }
 
 fn ftoc(temp: f64) -> f64 {
-    return f64::from(temp - 32.0) / 1.8;
+    (temp - 32.0) / 1.8
 }
