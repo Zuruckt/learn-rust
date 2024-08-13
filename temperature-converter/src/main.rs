@@ -16,7 +16,7 @@ fn main() {
             _ => 0,
         };
     
-        println!("Escolha a temperatura:");
+        println!("Oi sou o heitor estou aqui:");
         stdin()
         .read_line(&mut temperature)
         .expect("Temperatura Inválida");
